@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { QuoteParams } from '../types';
-import ImageGallery from './ImageGallery';
+import type { QuoteParams } from '../types.ts';
+import ImageGallery from './ImageGallery.tsx';
 
 // Custom hook for Intersection Observer animation
 const useAnimatedSection = <T extends HTMLElement,>() => {

@@ -1,17 +1,16 @@
-
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
-import type { QuoteParams } from './types';
-import Hero from './components/Hero';
-import AIQWidget from './components/AIQWidget';
+import type { QuoteParams } from './types.ts';
+import Hero from './components/Hero.tsx';
+import AIQWidget from './components/AIQWidget.tsx';
 
 // Lazy load sections for better initial load performance and a smaller initial bundle size.
-const ZimmerSection = lazy(() => import('./components/Sections').then(module => ({ default: module.ZimmerSection })));
-const PreiseSection = lazy(() => import('./components/Sections').then(module => ({ default: module.PreiseSection })));
-const UmgebungSection = lazy(() => import('./components/Sections').then(module => ({ default: module.UmgebungSection })));
-const AnfahrtSection = lazy(() => import('./components/Sections').then(module => ({ default: module.AnfahrtSection })));
-const RegelnAGBSection = lazy(() => import('./components/Sections').then(module => ({ default: module.RegelnAGBSection })));
-const KontaktSection = lazy(() => import('./components/Sections').then(module => ({ default: module.KontaktSection })));
-const Footer = lazy(() => import('./components/Sections').then(module => ({ default: module.Footer })));
+const ZimmerSection = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.ZimmerSection })));
+const PreiseSection = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.PreiseSection })));
+const UmgebungSection = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.UmgebungSection })));
+const AnfahrtSection = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.AnfahrtSection })));
+const RegelnAGBSection = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.RegelnAGBSection })));
+const KontaktSection = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.KontaktSection })));
+const Footer = lazy(() => import('./components/Sections.tsx').then(module => ({ default: module.Footer })));
 
 const SectionLoader: React.FC = () => (
     <div className="flex justify-center items-center py-16" aria-live="polite" aria-busy="true">

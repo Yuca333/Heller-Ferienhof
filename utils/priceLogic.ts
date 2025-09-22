@@ -1,5 +1,4 @@
-
-import type { QuoteParams, PriceResult } from './types';
+import type { QuoteParams, PriceResult } from '../types.ts';
 
 const PRICES = {
   EZ: 54,

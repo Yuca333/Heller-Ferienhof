@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
-import type { QuoteParams, PriceResult } from '../types';
-import { calculatePrice } from '../utils/priceLogic';
+import type { QuoteParams, PriceResult } from '../types.ts';
+import { calculatePrice } from '../utils/priceLogic.ts';
 
 const today = new Date().toISOString().split('T')[0];
 
