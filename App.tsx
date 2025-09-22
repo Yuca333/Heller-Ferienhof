@@ -1,39 +1,25 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import type { QuoteParams } from './types';
 import Hero from './components/Hero';
 import AIQWidget from './components/AIQWidget';
-import { ZimmerSection, PreiseSection, UmgebungSection, AnfahrtSection, RegelnAGBSection, KontaktSection, Footer } from './components/Sections';
 
-// Custom hook for Intersection Observer
-const useIntersectionObserver = <T extends HTMLElement,>(options: IntersectionObserverInit) => {
-  const containerRef = useRef<T | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+// Lazy load sections for better initial load performance and a smaller initial bundle size.
+const ZimmerSection = lazy(() => import('./components/Sections').then(module => ({ default: module.ZimmerSection })));
+const PreiseSection = lazy(() => import('./components/Sections').then(module => ({ default: module.PreiseSection })));
+const UmgebungSection = lazy(() => import('./components/Sections').then(module => ({ default: module.UmgebungSection })));
+const AnfahrtSection = lazy(() => import('./components/Sections').then(module => ({ default: module.AnfahrtSection })));
+const RegelnAGBSection = lazy(() => import('./components/Sections').then(module => ({ default: module.RegelnAGBSection })));
+const KontaktSection = lazy(() => import('./components/Sections').then(module => ({ default: module.KontaktSection })));
+const Footer = lazy(() => import('./components/Sections').then(module => ({ default: module.Footer })));
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        if (containerRef.current) {
-          observer.unobserve(containerRef.current);
-        }
-      }
-    }, options);
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      if (containerRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, [containerRef, options]);
-
-  return [containerRef, isVisible] as const;
-};
+const SectionLoader: React.FC = () => (
+    <div className="flex justify-center items-center py-16" aria-live="polite" aria-busy="true">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--color-forest)]" role="status">
+            <span className="sr-only">Inhalt wird geladen...</span>
+        </div>
+    </div>
+);
 
 
 const App: React.FC = () => {
@@ -106,16 +92,20 @@ const App: React.FC = () => {
           <AIQWidget onEnquire={handleEnquire} />
         </div>
         
-        <div className="space-y-[55px] md:space-y-[89px] overflow-x-clip">
-          {sections.map(({ id, ref, Component }) => (
-            <section key={id} ref={ref} id={id}>
-              <Component />
-            </section>
-          ))}
-        </div>
+        <Suspense fallback={<SectionLoader />}>
+          <div className="space-y-[55px] md:space-y-[89px] overflow-x-clip">
+            {sections.map(({ id, ref, Component }) => (
+              <section key={id} ref={ref} id={id}>
+                <Component />
+              </section>
+            ))}
+          </div>
+        </Suspense>
       </main>
       
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
       <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] to-transparent z-40">
         <button onClick={scrollToAnfrage} className="haptic-button w-full bg-[var(--color-forest)] text-white py-4 rounded-xl text-lg font-bold shadow-[var(--shadow-deep)]">
