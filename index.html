@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ferienhof Heller | Ruhe und Nähe zu München</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Color Psychology */
+        --color-forest: #2D5016;
+        --color-earth: #8B4513;
+        --color-gold: #DAA520;
+        --color-paper: #FFFDF5; /* A warmer cream than FFFDD0 */
+        --color-sage: #9CAF88;
+
+        /* Sophisticated Shadows */
+        --shadow-soft: 0 6px 24px rgba(45, 80, 22, 0.08);
+        --shadow-deep: 0 14px 48px rgba(45, 80, 22, 0.12);
+        --shadow-contact: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+
+        /* Motion & Timing */
+        --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-ui: cubic-bezier(0.4, 0, 0.2, 1);
+        --duration-premium: 420ms;
+        --duration-ui: 260ms;
+      }
+
+      body {
+        background-color: var(--color-paper);
+        color: var(--color-forest);
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      .font-display {
+        font-family: 'Source Serif 4', serif;
+      }
+
+      /* Attention Residue */
+      .section-title::before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 2px;
+        background-color: var(--color-gold);
+        opacity: 0.5;
+        margin-bottom: 13px;
+      }
+
+      /* Glassmorphism */
+      .glass-card {
+        background-color: rgba(255, 253, 245, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(45, 80, 22, 0.1);
+        box-shadow: var(--shadow-deep);
+      }
+      .glass-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        box-shadow: var(--shadow-contact);
+      }
+      
+      /* Haptic Simulation */
+      .haptic-button {
+        transition: all .2s var(--ease-ui);
+        box-shadow: var(--shadow-soft);
+      }
+      .haptic-button:active {
+        transform: translateY(2px) scale(0.985);
+        box-shadow: 0 2px 8px rgba(45, 80, 22, 0.1);
+        transition-duration: 0.1s;
+      }
+
+      /* Animation */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(21px);
+        transition: opacity var(--duration-premium) var(--ease-premium), transform var(--duration-premium) var(--ease-premium);
+      }
+
+      .is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
