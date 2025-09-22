@@ -1,6 +1,6 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import type { QuoteParams } from '../types';
+import ImageGallery from './ImageGallery';
 
 // Custom hook for Intersection Observer animation
 const useAnimatedSection = <T extends HTMLElement,>() => {
@@ -64,24 +64,37 @@ const PlaceholderImage: React.FC<{ width: number; height: number; className?: st
 
 export const ZimmerSection: React.FC = () => {
     const amenities = [ "Dusche/WC", "Fön", "TV", "WLAN" ];
+    
+    const singleRoomImages = [
+        { src: 'https://picsum.photos/seed/zimmer1/800/600', alt: 'Gemütliches Einzelzimmer mit Bett und Fenster' },
+        { src: 'https://picsum.photos/seed/zimmer2/800/600', alt: 'Schreibtischbereich im Einzelzimmer' },
+        { src: 'https://picsum.photos/seed/zimmer3/800/600', alt: 'Badezimmer mit Dusche' },
+    ];
+
+    const doubleRoomImages = [
+        { src: 'https://picsum.photos/seed/dzimmer1/800/600', alt: 'Geräumiges Doppelzimmer mit Doppelbett' },
+        { src: 'https://picsum.photos/seed/dzimmer2/800/600', alt: 'Sitzecke im Doppelzimmer' },
+        { src: 'https://picsum.photos/seed/dzimmer3/800/600', alt: 'Ausblick aus dem Fenster des Doppelzimmers' },
+    ];
+
     return (
         <SectionWrapper title="Unsere Zimmer" subtitle="Einfach, sauber und gemütlich – alles, was Sie für eine erholsame Nacht brauchen.">
             <div className="grid md:grid-cols-2 gap-[34px]">
-                <div className="glass-card rounded-2xl overflow-hidden anim-child fade-in-up">
-                    <PlaceholderImage width={600} height={400} className="h-64 w-full object-cover" />
-                    <div className="p-8">
+                <div className="glass-card rounded-2xl overflow-hidden anim-child fade-in-up flex flex-col">
+                    <ImageGallery images={singleRoomImages} />
+                    <div className="p-8 flex flex-col flex-grow">
                         <h3 className="font-display text-2xl font-semibold">Einzelzimmer</h3>
-                        <p className="mt-3 text-[var(--color-forest)]/80">Unsere Einzelzimmer sind praktisch eingerichtet und ideal für Geschäftsreisende oder Alleinreisende. Ein gemütliches Bett und ein eigener kleiner Arbeitsbereich sorgen für einen angenehmen Aufenthalt.</p>
+                        <p className="mt-3 text-[var(--color-forest)]/80 flex-grow">Unsere Einzelzimmer sind praktisch eingerichtet und ideal für Geschäftsreisende oder Alleinreisende. Ein gemütliches Bett und ein eigener kleiner Arbeitsbereich sorgen für einen angenehmen Aufenthalt.</p>
                         <div className="mt-6 pt-6 border-t border-[var(--color-forest)]/10 flex flex-wrap gap-x-5 gap-y-2">
                            {amenities.map(item => <span key={item} className="text-sm font-medium">{item}</span>)}
                         </div>
                     </div>
                 </div>
-                <div className="glass-card rounded-2xl overflow-hidden anim-child fade-in-up">
-                     <PlaceholderImage width={600} height={400} className="h-64 w-full object-cover" />
-                    <div className="p-8">
+                <div className="glass-card rounded-2xl overflow-hidden anim-child fade-in-up flex flex-col">
+                     <ImageGallery images={doubleRoomImages} />
+                    <div className="p-8 flex flex-col flex-grow">
                         <h3 className="font-display text-2xl font-semibold">Doppelzimmer</h3>
-                        <p className="mt-3 text-[var(--color-forest)]/80">Die Doppelzimmer bieten ausreichend Platz für zwei Personen. Sie sind der perfekte Rückzugsort nach einem langen Tag auf der Messe oder einer Erkundungstour in und um München.</p>
+                        <p className="mt-3 text-[var(--color-forest)]/80 flex-grow">Die Doppelzimmer bieten ausreichend Platz für zwei Personen. Sie sind der perfekte Rückzugsort nach einem langen Tag auf der Messe oder einer Erkundungstour in und um München.</p>
                          <div className="mt-6 pt-6 border-t border-[var(--color-forest)]/10 flex flex-wrap gap-x-5 gap-y-2">
                            {amenities.map(item => <span key={item} className="text-sm font-medium">{item}</span>)}
                         </div>
